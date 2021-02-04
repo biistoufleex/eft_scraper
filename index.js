@@ -2,8 +2,8 @@ const puppeteer = require('puppeteer');
 
 (async () => {
     const marketUrl = "https://tarkov-market.com/";
-    const searchValue = 'san est 10';
-
+    const searchValue = process.argv[2];
+ 
     const browser = await puppeteer.launch({
         headless: true,
     });
@@ -55,7 +55,6 @@ const puppeteer = require('puppeteer');
     }
     console.log('result of research for: ' + searchValue);
     console.table(searchResult);
-   
-    await page.waitForTimeout(1000);
+
     await browser.close();
 })();
