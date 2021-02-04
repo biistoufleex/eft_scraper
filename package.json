@@ -1,0 +1,23 @@
+{
+  "name": "eft_scraper",
+  "version": "1.0.0",
+  "description": "tarkov price checker",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo 'no test command'",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/biistoufleex/eft_scraper.git"
+  },
+  "author": "biistoufleex",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/biistoufleex/eft_scraper/issues"
+  },
+  "homepage": "https://github.com/biistoufleex/eft_scraper#readme",
+  "dependencies": {
+    "puppeteer": "^7.0.1"
+  }
+}
