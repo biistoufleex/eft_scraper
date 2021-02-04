@@ -1,1 +1,1 @@
-# eft_scraper
+# A tarkov price checker
