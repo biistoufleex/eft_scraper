@@ -1,24 +1,11 @@
-const Discord = require('discord.js');
 const puppeteer = require('puppeteer');
-const client = new Discord.Client();
-const { prefix, token } = require('./config.json');
 
-//Toutes les actions à faire quand le bot se connecte
-client.on("ready", function () {
-    console.log("Mon BOT est Connecté");
-})
-
-client.on('message', async (message) => {
-    if (!message.content.startsWith(prefix) || message.author.bot) return;
-
-    const args = message.content.slice(prefix.length).trim().split(' ');
-    const searchValue = args.shift().toLowerCase();
-
+(async () => {
     const marketUrl = "https://tarkov-market.com/";
-    // const searchValue = process.argv[2];
+    const searchValue = process.argv[2];
  
     const browser = await puppeteer.launch({
-        headless: true,
+        headless: false,
     });
 
     const page = await browser.newPage();
@@ -69,24 +56,7 @@ client.on('message', async (message) => {
     }
     console.log('result of research for: ' + searchValue);
     console.table(searchResult);
-    let sender = '';
-    searchResult.forEach(item => {
-        
-        sender += "***"+item.title+"*** \n" + 
-            " ***flea : ***" + item.price + " \n" +
-            "***"+item.trader+"***" + " :" + item.traderPrice + " \n" +
-            "__                                                 __ \n";
-            
-        });
     
-    if (sender.length >= 1) {
-        message.channel.send(sender);
-    } else {
-        message.channel.send("j'ai rien trouver whalla");
-    }
+    await page.waitUntil(5000);
     await browser.close();
-});
-
-client.login(token);
-
-// droit du bot https://discord.com/api/oauth2/authorize?client_id=807584503186063381&permissions=271969360&scope=bot
+})();
