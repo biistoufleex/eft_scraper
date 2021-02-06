@@ -5,7 +5,7 @@ const puppeteer = require('puppeteer');
     const searchValue = process.argv[2];
  
     const browser = await puppeteer.launch({
-        headless: false,
+        headless: true,
     });
 
     const page = await browser.newPage();
@@ -56,7 +56,6 @@ const puppeteer = require('puppeteer');
     }
     console.log('result of research for: ' + searchValue);
     console.table(searchResult);
-    
-    await page.waitUntil(5000);
+
     await browser.close();
 })();

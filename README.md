@@ -1,1 +1,1 @@
-# A tarkov price checker
+# A discord bot for tarkov price
