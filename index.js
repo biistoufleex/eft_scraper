@@ -3,7 +3,6 @@ const puppeteer = require('puppeteer');
 const client = new Discord.Client();
 const { prefix, token } = require('./config.json');
 
-//Toutes les actions à faire quand le bot se connecte
 client.on("ready", function () {
     console.log("Mon BOT est Connecté");
 })
@@ -15,7 +14,6 @@ client.on('message', async (message) => {
     const searchValue = args.shift().toLowerCase();
 
     const marketUrl = "https://tarkov-market.com/";
-    // const searchValue = process.argv[2];
  
     const browser = await puppeteer.launch({
         headless: true,
@@ -30,9 +28,8 @@ client.on('message', async (message) => {
 
     await page.goto(marketUrl, {waitUntil: 'networkidle2'});
 
-    const searchInput = await page.$('input[autofocus="autofocus"]');
+    const searchInput = await page.$('input[placeholder="Search"]');
     const bidouille = await page.evaluate( () => document.querySelector('.name').textContent.length).catch((e) => console.log(e));
-    // console.log(bidouille);
 
     await searchInput.type(searchValue);
     await page.waitForFunction(`document.querySelector('.name').textContent.length !== ${bidouille}`).catch((e) => console.log(e));

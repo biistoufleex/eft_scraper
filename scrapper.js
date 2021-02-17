@@ -17,12 +17,11 @@ const puppeteer = require('puppeteer');
 
     await page.goto(marketUrl, {waitUntil: 'networkidle2'});
 
-    const searchInput = await page.$('input[autofocus="autofocus"]');
-    const bidouille = await page.evaluate( () => document.querySelector('.name').textContent.length).catch((e) => console.log(e));
-    // console.log(bidouille);
+    const searchInput = await page.$('input[placeholder="Search"]');
+    const bidouille = await page.evaluate( () => document.querySelector('.name').textContent.length);
 
     await searchInput.type(searchValue);
-    await page.waitForFunction(`document.querySelector('.name').textContent.length !== ${bidouille}`).catch((e) => console.log(e));
+    await page.waitForFunction(`document.querySelector('.name').textContent.length !== ${bidouille}`);
 
     const searchResult = Array();
     const objectName = await page.$$('.name');
@@ -57,5 +56,6 @@ const puppeteer = require('puppeteer');
     console.log('result of research for: ' + searchValue);
     console.table(searchResult);
 
+    // await page.waitForTimeout(5000);
     await browser.close();
 })();
