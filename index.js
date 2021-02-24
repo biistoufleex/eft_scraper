@@ -29,10 +29,10 @@ client.on('message', async (message) => {
     await page.goto(marketUrl, {waitUntil: 'networkidle2'});
 
     const searchInput = await page.$('input[placeholder="Search"]');
-    const bidouille = await page.evaluate( () => document.querySelector('.name').textContent.length).catch((e) => console.log(e));
+    const bidouille = await page.evaluate(() => document.querySelector('img.img').getAttribute('src').length);
 
     await searchInput.type(searchValue);
-    await page.waitForFunction(`document.querySelector('.name').textContent.length !== ${bidouille}`).catch((e) => console.log(e));
+    await page.waitForFunction(`document.querySelector('img.img').getAttribute('src').length !== ${bidouille}`);
 
     const searchResult = Array();
     const objectName = await page.$$('.name');
