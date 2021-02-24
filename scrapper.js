@@ -5,7 +5,7 @@ const puppeteer = require('puppeteer');
     const searchValue = process.argv[2];
  
     const browser = await puppeteer.launch({
-        headless: false,
+        headless: true,
     });
 
     const page = await browser.newPage();
