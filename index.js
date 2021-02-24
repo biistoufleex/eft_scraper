@@ -32,7 +32,7 @@ client.on('message', async (message) => {
     const bidouille = await page.evaluate( () => document.querySelector('.name').textContent.length).catch((e) => console.log(e));
 
     await searchInput.type(searchValue);
-    
+
     try {
         await page.waitForFunction(function(arg){
             return document.querySelector('img.img').getAttribute('src').length !== arg
@@ -71,18 +71,17 @@ client.on('message', async (message) => {
     for (let i = 0; i < titles.length; i++) {
         searchResult.push({title: titles[i] , price: FleaPrices[i], trader: traderNames[i], traderPrice: traderPrices[i]})
     }
-    console.log('result of research for: ' + searchValue);
-    console.table(searchResult);
+    // console.log('result of research for: ' + searchValue);
+    // console.table(searchResult);
     let sender = '';
-    searchResult.forEach(item => {
-        
-        sender += "***"+item.title+"*** \n" + 
-            " ***flea : ***" + item.price + " \n" +
-            "***"+item.trader+"***" + " :" + item.traderPrice + " \n" +
-            "__                                                 __ \n";
-            
-        });
-    
+
+    for (let i = 0; i < 10; i++) {
+        sender += "***"+ searchResult[i].title+"*** \n" + 
+            " ***flea : ***" + searchResult[i].price + " \n" +
+            "***"+searchResult[i].trader+"***" + " :" + searchResult[i].traderPrice + " \n" +
+            "__                                                 __ \n";            
+    }
+
     if (sender.length >= 1) {
         message.channel.send(sender);
     } else {
