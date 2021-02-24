@@ -25,7 +25,7 @@ const puppeteer = require('puppeteer');
     try {
         await page.waitForFunction(function(arg){
             return document.querySelector('img.img').getAttribute('src').length !== arg
-        }, { timeout : 1000 }, bidouille);
+        }, { timeout : 2000 }, bidouille);
     } catch (error) {
         console.log(error);
     }

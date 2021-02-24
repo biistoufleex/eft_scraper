@@ -10,8 +10,8 @@ client.on("ready", function () {
 client.on('message', async (message) => {
     if (!message.content.startsWith(prefix) || message.author.bot) return;
 
-    const args = message.content.slice(prefix.length).trim().split(' ');
-    const searchValue = args.shift().toLowerCase();
+    const args = message.content.slice(prefix.length).trim();
+    const searchValue = args
 
     const marketUrl = "https://tarkov-market.com/";
  
@@ -29,14 +29,14 @@ client.on('message', async (message) => {
     await page.goto(marketUrl, {waitUntil: 'networkidle2'});
 
     const searchInput = await page.$('input[placeholder="Search"]');
-    const bidouille = await page.evaluate( () => document.querySelector('.name').textContent.length).catch((e) => console.log(e));
+    const bidouille = await page.evaluate(() => document.querySelector('img.img').getAttribute('src').length);
 
     await searchInput.type(searchValue);
 
     try {
         await page.waitForFunction(function(arg){
             return document.querySelector('img.img').getAttribute('src').length !== arg
-        }, { timeout : 1000 }, bidouille);
+        }, { timeout : 2000 }, bidouille);
     } catch (error) {
         console.log(error);
     }
@@ -71,17 +71,17 @@ client.on('message', async (message) => {
     for (let i = 0; i < titles.length; i++) {
         searchResult.push({title: titles[i] , price: FleaPrices[i], trader: traderNames[i], traderPrice: traderPrices[i]})
     }
-    // console.log('result of research for: ' + searchValue);
-    // console.table(searchResult);
+
     let sender = '';
 
-    for (let i = 0; i < 10; i++) {
-        sender += "***"+ searchResult[i].title+"*** \n" + 
-            " ***flea : ***" + searchResult[i].price + " \n" +
-            "***"+searchResult[i].trader+"***" + " :" + searchResult[i].traderPrice + " \n" +
-            "__                                                 __ \n";            
-    }
-
+    searchResult.forEach(item => {
+        
+        sender += "***"+item.title+"*** \n" + 
+            " ***flea : ***" + item.price + " \n" +
+            "***"+item.trader+"***" + " :" + item.traderPrice + " \n" +
+            "__                                                 __ \n";
+        });
+    
     if (sender.length >= 1) {
         message.channel.send(sender);
     } else {
