@@ -11,8 +11,12 @@ client.on("ready", function () {
 client.on('message', async (message) => {
     if (!message.content.startsWith(prefix) || message.author.bot) return;
 
-    // compte le nombre de call du bot
-    fs.writeFileSync("config.json",JSON.stringify(require("obop").update({$inc:{call:1}})(JSON.parse(require("fs").readFileSync("config.json")))));
+    try {
+        // compte le nombre de call du bot
+        fs.writeFileSync("config.json",JSON.stringify(require("obop").update({$inc:{call:1}})(JSON.parse(require("fs").readFileSync("config.json")))));
+    } catch (error) {
+        console.log(error);
+    }
 
     const args = message.content.slice(prefix.length).trim();
     const searchValue = args
