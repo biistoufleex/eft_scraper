@@ -19,6 +19,19 @@ client.on('message', async (message) => {
     }
 
     const args = message.content.slice(prefix.length).trim();
+
+    if (args == "call"){
+        fs.readFile('config.json', (err, data) => {
+
+            if (err) throw err;
+        
+            const fileData = JSON.parse(data);
+            console.log(fileData.call);
+            message.channel.send("y'a deja " + fileData.call + " rats qui ont fait appel a moi !");
+        });
+        return;
+    }
+
     const searchValue = args
 
     const marketUrl = "https://tarkov-market.com/";
