@@ -19,6 +19,8 @@
   "homepage": "https://github.com/biistoufleex/eft_scraper#readme",
   "dependencies": {
     "discord.js": "^12.5.1",
-    "puppeteer": "^7.0.1"
+    "obop": "^0.2.0",
+    "puppeteer": "^7.0.1",
+    "sqlite3": "^5.0.2"
   }
 }
