@@ -2,6 +2,7 @@ const Discord = require('discord.js');
 const puppeteer = require('puppeteer');
 const client = new Discord.Client();
 const { prefix, token } = require('./config.json');
+const fs = require("fs");
 
 client.on("ready", function () {
     console.log("Mon BOT est Connecté");
@@ -11,7 +12,7 @@ client.on('message', async (message) => {
     if (!message.content.startsWith(prefix) || message.author.bot) return;
 
     // compte le nombre de call du bot
-    require("fs").writeFileSync("config.json",JSON.stringify(require("obop").update({$inc:{call:1}})(JSON.parse(require("fs").readFileSync("config.json")))));
+    fs.writeFileSync("config.json",JSON.stringify(require("obop").update({$inc:{call:1}})(JSON.parse(require("fs").readFileSync("config.json")))));
 
     const args = message.content.slice(prefix.length).trim();
     const searchValue = args
