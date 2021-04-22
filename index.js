@@ -5,7 +5,7 @@ const { prefix, token } = require('./config.json');
 const fs = require("fs");
 
 client.on("ready", function () {
-    console.log("Mon BOT est Connecté");
+    console.log("Mon BOT est Connecté !");
 })
 
 client.on('message', async (message) => {
